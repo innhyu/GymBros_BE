@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  time: 2018-10-21 15:49:08
+  duration: 
+  location: MyString
+  team_size: 
+
+two:
+  title: MyString
+  time: 2018-10-21 15:49:08
+  duration: 
+  location: MyString
+  team_size: 
