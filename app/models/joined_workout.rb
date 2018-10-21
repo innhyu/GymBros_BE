@@ -1,0 +1,2 @@
+class JoinedWorkout < ApplicationRecord
+end

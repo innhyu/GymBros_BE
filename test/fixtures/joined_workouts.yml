@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workout_id: 
+  user_id: 
+  approved: false
+  checked_in: false
+
+two:
+  workout_id: 
+  user_id: 
+  approved: false
+  checked_in: false
