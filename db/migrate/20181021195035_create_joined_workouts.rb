@@ -5,6 +5,7 @@ class CreateJoinedWorkouts < ActiveRecord::Migration[5.1]
       t.integer :user_id
       t.boolean :approved
       t.boolean :checked_in
+      t.boolean :accepted
 
       t.timestamps
     end

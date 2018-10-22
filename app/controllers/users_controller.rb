@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-before_action :set_user, only: [:show, :update, :destroy]
+	before_action :set_user, only: [:show, :update, :destroy]
+	authorize_resource
 
 	def index
 		@users = User.all
@@ -12,7 +13,6 @@ before_action :set_user, only: [:show, :update, :destroy]
 
 	def create
 		@user = User.new(user_params)
-
 		if @user.save
 			render json: @user, status: :created, location: @user
 		else
@@ -38,6 +38,6 @@ before_action :set_user, only: [:show, :update, :destroy]
 	end
 
 	def user_params
-		params.permit(:facebook_id, :email, :first_name, :last_name, :gender)
+		params.permit(:facebook_id, :email, :password, :role, :first_name, :last_name, :gender, :age)
 	end
 end

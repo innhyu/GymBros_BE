@@ -1,5 +1,6 @@
 class WorkoutsController < ApplicationController
 	before_action :set_workout, only: [:show, :update, :destroy]
+	authorize_resource
 
 	def index
 		@workouts = workout.all
@@ -12,8 +13,9 @@ class WorkoutsController < ApplicationController
 
 	def create
 		@workout = workout.new(workout_params)
-
 		if @workout.save
+			info = {user_id: session[:user_id], workout_id: @workout.id, approved: true, checked_in: false, accepted: true}
+			JoinedWorkout.create(info)
 			render json: @workout, status: :created, location: @workout
 		else
 			render json: @workout.errors, status: :unprocessable_entity
@@ -38,6 +40,6 @@ class WorkoutsController < ApplicationController
 	end
 
 	def workout_params
-		params.permit(:title, :time, :duration, :location, :team_size)
+		params.permit(:title, :time, :duration, :location, :team_size, :finalized)
 	end
 end

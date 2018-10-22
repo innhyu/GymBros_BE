@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20181021195054) do
     t.integer "user_id"
     t.boolean "approved"
     t.boolean "checked_in"
+    t.boolean "accepted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,16 +28,21 @@ ActiveRecord::Schema.define(version: 20181021195054) do
     t.string "first_name"
     t.string "last_name"
     t.string "gender"
+    t.string "password_digest"
+    t.integer "age"
+    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "workouts", force: :cascade do |t|
+    t.integer "user_id"
     t.string "title"
     t.datetime "time"
     t.integer "duration"
     t.string "location"
     t.integer "team_size"
+    t.boolean "finalized"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
