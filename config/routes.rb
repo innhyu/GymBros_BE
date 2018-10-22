@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+	resources :users
+	resources :workouts
+	resources :joined_workouts
+	#write custom routes for custom requests for joined_workouts
 end
