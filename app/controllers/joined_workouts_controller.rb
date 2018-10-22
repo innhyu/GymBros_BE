@@ -3,6 +3,8 @@ class JoinedWorkoutsController < ApplicationController
 	authorize_resource
 
 	def create
+		#Most of this data is already in the system, just the workout_id is the only param
+		#should maybe look into using params.permit for workout_id here too
 		info = {user_id: session[:user_id], workout_id: params[:workout_id], approved: true, checked_in: false, accepted: true}
 		@joined_workout = JoinedWorkout.new(info)
 		if @joined_workout.save

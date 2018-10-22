@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	#standard api CRUD controller
 	before_action :set_user, only: [:show, :update, :destroy]
 	authorize_resource
 

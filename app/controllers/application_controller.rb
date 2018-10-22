@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
 	private
+	#to check if user is logged in
 	def current_user
 		@current_user ||= User.find(session[:user_id]) if session[:user_id]
 	end

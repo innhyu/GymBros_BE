@@ -1,5 +1,6 @@
 class WorkoutsController < ApplicationController
 	before_action :set_workout, only: [:show, :update, :destroy]
+	#authorize_resource is used by cancancan to see where it should be applied
 	authorize_resource
 
 	def index
@@ -14,6 +15,7 @@ class WorkoutsController < ApplicationController
 	def create
 		@workout = workout.new(workout_params)
 		if @workout.save
+			#set and save joined_workout for owner when creating workout
 			info = {user_id: session[:user_id], workout_id: @workout.id, approved: true, checked_in: false, accepted: true}
 			JoinedWorkout.create(info)
 			render json: @workout, status: :created, location: @workout
