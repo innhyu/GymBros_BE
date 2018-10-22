@@ -8,9 +8,16 @@ class WorkoutsController < ApplicationController
 		render json: @workouts
 	end
 
+	# Getting the information for the workout and the joined workouts
 	def show
-		render json: @workout
+		@joined_workouts = @workout.joined_workouts
+		respond_to do |format|
+			format.json  { render :json => {:workout => @workout, 
+											:joined_workouts => @joined_workouts }}
+		end		  
 	end
+
+	{ workout: {name: asdf, id: asdf, joined_workout: {123, 456, 789}}}
 
 	def create
 		@workout = workout.new(workout_params)
