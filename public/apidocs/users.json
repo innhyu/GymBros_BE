@@ -81,7 +81,15 @@
               "name": "gender",
               "type": "string",
               "description": "Gender",
-              "required": true
+              "required": true,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "Male",
+                  "Female",
+                  "Other"
+                ]
+              }
             },
             {
               "paramType": "form",
