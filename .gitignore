@@ -3,3 +3,6 @@
 
 # Development
 *.log
+
+# Temp Files
+tmp/*
