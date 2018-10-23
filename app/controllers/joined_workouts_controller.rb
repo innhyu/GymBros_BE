@@ -1,6 +1,6 @@
 class JoinedWorkoutsController < ApplicationController
 	# Documentation for User Controller
-	swagger_controller :joined_workouts, "Joined Workout"
+	swagger_controller :joined_workout, "Joined Workout"
 
 	swagger_api :create do
 		summary "Joins a user into a workout through an extra table"
