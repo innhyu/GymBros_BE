@@ -17,8 +17,6 @@ class WorkoutsController < ApplicationController
 		end		  
 	end
 
-	{ workout: {name: asdf, id: asdf, joined_workout: {123, 456, 789}}}
-
 	def create
 		@workout = workout.new(workout_params)
 		if @workout.save
