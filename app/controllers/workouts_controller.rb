@@ -16,6 +16,8 @@ class WorkoutsController < ApplicationController
 
 	swagger_api :create do
 		summary "Creates a workout with a given set of parameters"
+		# TODO : User ID should be removed later when there is an authentication
+		param :form, :user_id, :integer, :required, "User ID"
 		param :form, :title, :integer, :optional, "Title"
 		param :form, :time, :string, :required, "Time"
 		param :form, :duration, :string, :required, "Duration"
