@@ -6,6 +6,10 @@
     {
       "path": "/apidocs/users.{format}",
       "description": "User"
+    },
+    {
+      "path": "/apidocs/workouts.{format}",
+      "description": "Workout"
     }
   ],
   "authorizations": null,
