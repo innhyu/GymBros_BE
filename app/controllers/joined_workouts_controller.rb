@@ -11,16 +11,16 @@ class JoinedWorkoutsController < ApplicationController
 	end
 
 	swagger_api :accept do 
-		summary "Updates the joined workout to be accepted"
-		param :form, :id, :integer, :required, "Joined Workout ID"
+		summary "Updates the joined workout to be accept"
+		param :path, :id, :integer, :required, "Joined Workout ID"
 		param :form, :workout_id, :integer, :required, "Workout ID"
 		param :form, :user_id, :integer, :required, 'User ID'
 		response :not_found
 	end
-
-	swagger_api :approve do
-		summary "Updates the joined workout to be approved"
-		param :form, :id, :integer, :required, "Joined Workout ID"
+	
+	swagger_api :approve do 
+		summary "Updates the joined workout to be approve"
+		param :path, :id, :integer, :required, "Joined Workout ID"
 		param :form, :workout_id, :integer, :required, "Workout ID"
 		param :form, :user_id, :integer, :required, 'User ID'
 		response :not_found

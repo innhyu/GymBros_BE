@@ -2,10 +2,10 @@ Rails.application.routes.draw do
 	# Rails basic resources
 	resources :users
 	resources :workouts
-	resources :joined_workouts
+	resources :joined_workouts, only: [:create, :destroy]
 
 	# Custom Routes
-	post 'joined_workouts/approve' => 'joined_workout#approve'
- 	post 'joined_workouts/accept' => 'joined_workout#accept'
+	patch 'joined_workouts/:id/approve', to: 'joined_workouts#approve'
+	patch 'joined_workouts/:id/accept', to: 'joined_workouts#accept'
 
 end
