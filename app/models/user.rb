@@ -11,9 +11,9 @@ class User < ApplicationRecord
 	validates :email, presence: true, uniqueness: { case_sensitive: false}, format: { with: /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info))\z/i, message: "is not a valid format" }
     validates :role, presence: true, inclusion: { in: ROLES_LIST }
     validates :gender, presence: true, inclusion: { in: GENDERS }
-    validates_presence_of :password, :first_name, :last_name, :age
+    validates_presence_of :password, :password_confirmation, :first_name, :last_name, :age
     validates_numericality_of :age, less_than: 150, greater_than_or_equal_to: 18
-    validates_confirmation_of :password
+    validates :password, :length => { :minimum => 4 }, :confirmation => true
 
 	#Relationships
 	has_many :workouts
