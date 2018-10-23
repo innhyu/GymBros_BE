@@ -76,7 +76,7 @@ class JoinedWorkoutsController < ApplicationController
 	private
 	# Method to find set the joined workout before update and destroy endpoints
 	def set_joined_workout
-		@joined_workout.JoinedWorkout.find(params[:id])
+		@joined_workout = JoinedWorkout.find(params[:id])
 	end
 
 end
