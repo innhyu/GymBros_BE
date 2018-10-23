@@ -45,7 +45,7 @@ class WorkoutsController < ApplicationController
 	before_action :set_workout, only: [:show, :update, :destroy]
 
 	def index
-		@workouts = workout.all
+		@workouts = Workout.all
 		render json: @workouts
 	end
 
@@ -84,7 +84,7 @@ class WorkoutsController < ApplicationController
 
 	private
 	def set_workout
-		@workout.workout.find(params[:id])
+		@workout = Workout.find(params[:id])
 	end
 
 	def workout_params
