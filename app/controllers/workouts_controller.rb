@@ -44,12 +44,17 @@ class WorkoutsController < ApplicationController
 	# Callbacks
 	before_action :set_workout, only: [:show, :update, :destroy]
 
+	# An endpoint to fetch all the workouts
+	# Parameters: User ID
+	# TODO : We want to limit the visibility for workouts depending on the user's profile information
 	def index
 		@workouts = Workout.all
 		render json: @workouts
 	end
 
-	# Getting the information for the workout and the joined workouts
+	# An endoint to show the workokut and related details
+	# Parameters: User ID, Workout ID
+	# Note: Returns all related information such as all joined_workouts and 
 	def show
 		@joined_workouts = @workout.joined_workouts
 		respond_to do |format|
@@ -58,18 +63,28 @@ class WorkoutsController < ApplicationController
 		end		  
 	end
 
+	# An endpoint to creates a workout
+	# Parameters: workout_params method
+	# Side Effect: JoinedWorkout is created with a user_id
 	def create
-		@workout = workout.new(workout_params)
+		@workout = Workout.new(workout_params)
+		# Finalized is set by the server
+		@workout.finalized = false
+		# TODO : USER IS A DUMMY: PUT AN ACTUAL USER
+		user = User.new()
+		@workout.user = user
 		if @workout.save
-			#set and save joined_workout for owner when creating workout
-			info = {user_id: session[:user_id], workout_id: @workout.id, approved: true, checked_in: false, accepted: true}
+			# TODO : USER_ID IS A DUMMY; PUT AN ACTUAL USER ID
+			info = {user_id: 1, workout_id: @workout.id, approved: true, checked_in: false, accepted: true}
 			JoinedWorkout.create(info)
-			render json: @workout, status: :created, location: @workout
+			render json: @workout, status: :created
 		else
 			render json: @workout.errors, status: :unprocessable_entity
 		end
 	end
 
+	# An endpoint to update the workout 
+	# Parameters: workout_params method and workout_id
 	def update
 		if @workout.update(workout_params)
 			render json: @workout
@@ -78,16 +93,22 @@ class WorkoutsController < ApplicationController
 		end
 	end
 
+	# An endpoint to destroy the workout
+	# Parameters: workout_id 
 	def destroy
 		@workout.delete
 	end
 
 	private
+	# Method to set the workout before certain actions: SHOW, UPDATE, DESTROY
 	def set_workout
-		@workout.workout.find(params[:id])
+		@workout = Workout.find(params[:id])
 	end
 
+	# Parameter for creating a workout 
+	# TODO : Make a separate endpoint for updating a workout / finalizing a workout
 	def workout_params
-		params.permit(:title, :time, :duration, :location, :team_size, :finalized)
+		params.permit(:title, :time, :duration, :location, :team_size)
 	end
+
 end
