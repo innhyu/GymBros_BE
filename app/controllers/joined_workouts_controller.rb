@@ -35,7 +35,7 @@ class JoinedWorkoutsController < ApplicationController
 	# Parameters: joined_workout params
 	# TODO : Use authentication to set the user_id.. but you can use workout_id
 	def create
-		info = {user_id: params[:user_id], workout_id: params[:workout_id], approved: true, checked_in: false, accepted: true}
+		info = {user_id: params[:user_id], workout_id: params[:workout_id], approved: true, checked_in: false, accepted: false}
 		@joined_workout = JoinedWorkout.new(info)
 		if @joined_workout.save
 			render json: @joined_workout, status: :created, location: @joined_workout
