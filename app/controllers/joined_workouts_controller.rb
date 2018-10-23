@@ -13,16 +13,12 @@ class JoinedWorkoutsController < ApplicationController
 	swagger_api :accept do 
 		summary "Updates the joined workout to be accept"
 		param :path, :id, :integer, :required, "Joined Workout ID"
-		param :form, :workout_id, :integer, :required, "Workout ID"
-		param :form, :user_id, :integer, :required, 'User ID'
 		response :not_found
 	end
 	
 	swagger_api :approve do 
 		summary "Updates the joined workout to be approve"
 		param :path, :id, :integer, :required, "Joined Workout ID"
-		param :form, :workout_id, :integer, :required, "Workout ID"
-		param :form, :user_id, :integer, :required, 'User ID'
 		response :not_found
 	end
 
@@ -37,9 +33,9 @@ class JoinedWorkoutsController < ApplicationController
 
 	# An endpoint to create a joined workout
 	# Parameters: joined_workout params
-	# TODO : Use authentication to set the user_id
+	# TODO : Use authentication to set the user_id.. but you can use workout_id
 	def create
-		info = {user_id: session[:user_id], workout_id: params[:workout_id], approved: true, checked_in: false, accepted: true}
+		info = {user_id: params[:user_id], workout_id: params[:workout_id], approved: true, checked_in: false, accepted: true}
 		@joined_workout = JoinedWorkout.new(info)
 		if @joined_workout.save
 			render json: @joined_workout, status: :created, location: @joined_workout
