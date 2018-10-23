@@ -29,6 +29,9 @@ gem 'cancancan', '~> 2.0'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+# Using Validates-Timeliness gem 
+gem 'validates_timeliness', '~> 5.0.0.alpha3'
+
 # Use Swagger Doc for documentation and testing API
 gem 'swagger-docs'
 
