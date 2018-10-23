@@ -57,10 +57,7 @@ class WorkoutsController < ApplicationController
 	# Note: Returns all related information such as all joined_workouts and 
 	def show
 		@joined_workouts = @workout.joined_workouts
-		respond_to do |format|
-			format.json  { render :json => {:workout => @workout, 
-											:joined_workouts => @joined_workouts }}
-		end		  
+		render :json => {:workout => @workout, :joined_workouts => @joined_workouts, :owner => @workout.user}
 	end
 
 	# An endpoint to creates a workout
@@ -70,12 +67,9 @@ class WorkoutsController < ApplicationController
 		@workout = Workout.new(workout_params)
 		# Finalized is set by the server
 		@workout.finalized = false
-		# TODO : USER IS A DUMMY: PUT AN ACTUAL USER
-		user = User.new()
-		@workout.user = user
 		if @workout.save
 			# TODO : USER_ID IS A DUMMY; PUT AN ACTUAL USER ID
-			info = {user_id: 1, workout_id: @workout.id, approved: true, checked_in: false, accepted: true}
+			info = {user_id: @workout.user_id, workout_id: @workout.id, approved: true, checked_in: false, accepted: true}
 			JoinedWorkout.create(info)
 			render json: @workout, status: :created
 		else
@@ -107,8 +101,9 @@ class WorkoutsController < ApplicationController
 
 	# Parameter for creating a workout 
 	# TODO : Make a separate endpoint for updating a workout / finalizing a workout
+	# TODO : Take out user_id once authentication is in place
 	def workout_params
-		params.permit(:title, :time, :duration, :location, :team_size)
+		params.permit(:title, :time, :duration, :location, :team_size, :user_id)
 	end
 
 end
