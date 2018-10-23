@@ -45,7 +45,7 @@ class WorkoutsController < ApplicationController
 	before_action :set_workout, only: [:show, :update, :destroy]
 
 	def index
-		@workouts = workout.all
+		@workouts = Workout.all
 		render json: @workouts
 	end
 

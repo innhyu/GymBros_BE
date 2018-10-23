@@ -4,6 +4,16 @@ class User < ApplicationRecord
 
 	#Used for role? method and sometimes views
 	ROLES = [['Real', :real]]
+	ROLES_LIST = ['Real']
+	GENDERS = ['Male', 'Female', 'Other']
+
+	#Validations
+	validates :email, presence: true, uniqueness: { case_sensitive: false}, format: { with: /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info))\z/i, message: "is not a valid format" }
+    validates :role, presence: true, inclusion: { in: ROLES_LIST }
+    validates :gender, presence: true, inclusion: { in: GENDERS }
+    validates_presence_of :password, :first_name, :last_name, :age
+    validates_numericality_of :age, less_than: 150, greater_than_or_equal_to: 18
+    validates_confirmation_of :password
 
 	#Relationships
 	has_many :workouts
