@@ -47,7 +47,15 @@
               "name": "location",
               "type": "string",
               "description": "Location",
-              "required": true
+              "required": true,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "WIEGAND GYMNASIUM",
+                  "JARED L. COHON CENTER GYMNASIUM",
+                  "SKIBO GYMNASIUM"
+                ]
+              }
             },
             {
               "paramType": "form",
@@ -128,7 +136,15 @@
               "name": "location",
               "type": "string",
               "description": "Location",
-              "required": true
+              "required": true,
+              "allowableValues": {
+                "valueType": "LIST",
+                "values": [
+                  "WIEGAND GYMNASIUM",
+                  "JARED L. COHON CENTER GYMNASIUM",
+                  "SKIBO GYMNASIUM"
+                ]
+              }
             },
             {
               "paramType": "form",

@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
 
 
-	#standard api CRUD controller
+	# Callbacks
 	before_action :set_user, only: [:show, :update, :destroy]
 
 	#for testing
@@ -92,10 +92,13 @@ class UsersController < ApplicationController
 	end
 
 	private
+	# Method to set the user before endpoints for show, update and destroy
 	def set_user
 		@user.User.find(params[:id])
 	end
 
+	# Parameter whitelisting for user_params for create
+	# TODO : ADD SEPARETE METHOD FOR UPDATING USER PARAMS
 	def user_params
 		params.permit(:facebook_id, :email, :password, :password_confirmation, :role, :first_name, :last_name, :gender, :age)
 	end

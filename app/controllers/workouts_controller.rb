@@ -19,7 +19,7 @@ class WorkoutsController < ApplicationController
 		param :form, :title, :integer, :optional, "Title"
 		param :form, :time, :string, :required, "Time"
 		param :form, :duration, :string, :required, "Duration"
-		param :form, :location, :string, :required, "Location"
+		param_list :form, :location, :string, :required, "Location", Workout::LOCATIONS
 		param :form, :team_size, :string, :required, "Team Size"
 		response :not_acceptable
 	end
@@ -29,7 +29,7 @@ class WorkoutsController < ApplicationController
 		param :form, :title, :integer, :optional, "Title"
 		param :form, :time, :string, :required, "Time"
 		param :form, :duration, :string, :required, "Duration"
-		param :form, :location, :string, :required, "Location"
+		param_list :form, :location, :string, :required, "Location", Workout::LOCATIONS
 		param :form, :team_size, :string, :required, "Team Size"
 		response :not_acceptable
 		response :not_found
