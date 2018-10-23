@@ -8,50 +8,41 @@ class WorkoutsController < ApplicationController
 		end
 	
 		swagger_api :show do 
-			summary "Shows a particular user's data"
-			param :path, :id, :integer, :required, "User ID"
-			notes "This fetches a single user"
+			summary "Shows a particular workout's data"
+			param :path, :id, :integer, :required, "Workout ID"
+			notes "This fetches all data related to the workout"
 			response :not_found
 		end
 	
 		swagger_api :create do
-			summary "Creates a user with a given set of parameters"
-			param :form, :facebook_id, :integer, :optional, "Facebook ID"
-			param :form, :email, :string, :required, "Email"
-			param :form, :password, :string, :required, "Password"
-			param :form, :password_confirmation, :string, :required, "Password Confirmation"
-			param_list :form, :role, :string, :required, "Role", ['Real']
-			param :form, :first_name, :string, :required, "First Name"
-			param :form, :last_name, :string, :required, "Last Name"
-			param :form, :gender, :string, :required, "Gender"
-			param :form, :age, :integer, :required, "Age"
+			summary "Creates a workout with a given set of parameters"
+			param :form, :title, :integer, :optional, "Title"
+			param :form, :time, :string, :required, "Time"
+			param :form, :duration, :string, :required, "Duration"
+			param :form, :location, :string, :required, "Location"
+			param :form, :team_size, :string, :required, "Team Size"
 			response :not_acceptable
 		end
 	
 		swagger_api :update do
-			summary "Updates a user with a given set of parameters"
-			param :path, :id, :integer, :required, "User ID"
-			param :form, :password, :string, :required, "Password"
-			param :form, :password_confirmation, :string, :required, "Password Confirmation"
-			param :form, :first_name, :string, :required, "First Name"
-			param :form, :last_name, :string, :required, "Last Name"
-			param :form, :gender, :string, :required, "Gender"
-			param :form, :age, :integer, :required, "Age"
+			summary "Updates a workout with a given set of parameters"
+			param :form, :title, :integer, :optional, "Title"
+			param :form, :time, :string, :required, "Time"
+			param :form, :duration, :string, :required, "Duration"
+			param :form, :location, :string, :required, "Location"
+			param :form, :team_size, :string, :required, "Team Size"
 			response :not_acceptable
 			response :not_found
 		end
 	
 		swagger_api :destroy do
-			summary "Destroys a user with a given set of parameters"
-			param :path, :id, :integer, :required, "User ID"
+			summary "Destroys a workout"
+			param :path, :id, :integer, :required, "Workout ID"
 			response :not_found
 		end
 	
 	# Callbacks
 	before_action :set_workout, only: [:show, :update, :destroy]
-
-	# authorize_resource is used by cancancan to see where it should be applied
-	authorize_resource
 
 	def index
 		@workouts = workout.all
