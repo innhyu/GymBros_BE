@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
 
 
-	#standard api CRUD controller
+	# Callbacks
 	before_action :set_user, only: [:show, :update, :destroy]
 
 	#for testing
