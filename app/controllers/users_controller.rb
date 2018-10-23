@@ -20,10 +20,10 @@ class UsersController < ApplicationController
 		param :form, :email, :string, :required, "Email"
 		param :form, :password, :string, :required, "Password"
 		param :form, :password_confirmation, :string, :required, "Password Confirmation"
-		param_list :form, :role, :string, :required, "Role", ['Real']
+		param_list :form, :role, :string, :required, "Role", User::ROLES_LIST
 		param :form, :first_name, :string, :required, "First Name"
 		param :form, :last_name, :string, :required, "Last Name"
-		param :form, :gender, :string, :required, "Gender"
+		param_list :form, :gender, :string, :required, "Gender", User::GENDERS
 		param :form, :age, :integer, :required, "Age"
 		response :not_acceptable
 	end
@@ -51,17 +51,21 @@ class UsersController < ApplicationController
 
 	#standard api CRUD controller
 	before_action :set_user, only: [:show, :update, :destroy]
-	authorize_resource
 
+	#for testing
 	def index
 		@users = User.all
 		render json: @users
 	end
 
+	# An endpoint to fetch a user's profile info
+	# Parameters: user_id
 	def show
 		render json: @user
 	end
 
+	# An endpoint to create a user
+	# Parameters: user_params
 	def create
 		@user = User.new(user_params)
 		if @user.save
@@ -71,6 +75,8 @@ class UsersController < ApplicationController
 		end
 	end
 
+	# An endpoint to update a user
+	# Parameters: user_params
 	def update
 		if @user.update(user_params)
 			render json: @user
@@ -79,6 +85,8 @@ class UsersController < ApplicationController
 		end
 	end
 
+	# An endpoint to destroy a user
+	# Parameters: user_id
 	def destroy
 		@user.delete
 	end

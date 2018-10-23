@@ -4,7 +4,7 @@ class WorkoutsController < ApplicationController
 	authorize_resource
 
 	def index
-		@workouts = workout.all
+		@workouts = Workout.all
 		render json: @workouts
 	end
 
