@@ -1,0 +1,186 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "workouts",
+  "apis": [
+    {
+      "path": "/workouts.json",
+      "operations": [
+        {
+          "summary": "Fetches all workouts",
+          "notes": "There is no visibility settings at the moment",
+          "nickname": "Workouts#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/workouts.json",
+      "operations": [
+        {
+          "summary": "Creates a workout with a given set of parameters",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "title",
+              "type": "integer",
+              "description": "Title",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "time",
+              "type": "string",
+              "description": "Time",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "duration",
+              "type": "string",
+              "description": "Duration",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "location",
+              "type": "string",
+              "description": "Location",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "team_size",
+              "type": "string",
+              "description": "Team Size",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Workouts#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/workouts/{id}.json",
+      "operations": [
+        {
+          "summary": "Shows a particular workout's data",
+          "notes": "This fetches all data related to the workout",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Workout ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Workouts#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/workouts/{id}.json",
+      "operations": [
+        {
+          "summary": "Updates a workout with a given set of parameters",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "title",
+              "type": "integer",
+              "description": "Title",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "time",
+              "type": "string",
+              "description": "Time",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "duration",
+              "type": "string",
+              "description": "Duration",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "location",
+              "type": "string",
+              "description": "Location",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "team_size",
+              "type": "string",
+              "description": "Team Size",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "nickname": "Workouts#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/workouts/{id}.json",
+      "operations": [
+        {
+          "summary": "Destroys a workout",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Workout ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Workouts#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}
