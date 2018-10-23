@@ -6,3 +6,6 @@
 
 # Temp Files
 tmp/*
+
+# Sqlite
+*.sqlite3
