@@ -48,7 +48,7 @@ class JoinedWorkoutsController < ApplicationController
 	# Parameters: joined_workout id
 	# TODO : Use authentication to check that the owner is calling this
 	def accept
-		if @joined_workout.update(accept: true)
+		if @joined_workout.update(accepted: true)
 			render json: @joined_workout
 		else
 			render json: @joined_workout.errors, status: :unprocessable_entity
