@@ -23,6 +23,13 @@
           "parameters": [
             {
               "paramType": "form",
+              "name": "user_id",
+              "type": "integer",
+              "description": "User ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
               "name": "title",
               "type": "integer",
               "description": "Title",

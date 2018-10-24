@@ -75,20 +75,6 @@
               "type": "integer",
               "description": "Joined Workout ID",
               "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "workout_id",
-              "type": "integer",
-              "description": "Workout ID",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "user_id",
-              "type": "integer",
-              "description": "User ID",
-              "required": true
             }
           ],
           "responseMessages": [
@@ -114,20 +100,6 @@
               "name": "id",
               "type": "integer",
               "description": "Joined Workout ID",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "workout_id",
-              "type": "integer",
-              "description": "Workout ID",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "user_id",
-              "type": "integer",
-              "description": "User ID",
               "required": true
             }
           ],

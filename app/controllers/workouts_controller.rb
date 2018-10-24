@@ -4,18 +4,21 @@ class WorkoutsController < ApplicationController
 
 	swagger_api :index do
 		summary "Fetches all workouts"
-		notes "There is no visibility settings at the moment"
+		notes "There is no visibility settings at the moment; this action will allow filters and sorts."
 	end
 
 	swagger_api :show do 
 		summary "Shows a particular workout's data"
+		notes "This fetches all data related to the workout, including owner and joined workouts."
 		param :path, :id, :integer, :required, "Workout ID"
-		notes "This fetches all data related to the workout"
 		response :not_found
 	end
 
 	swagger_api :create do
 		summary "Creates a workout with a given set of parameters"
+		notes "For now, we are passing the owner as a parameter as we do not have authentication"
+		# TODO : User ID should be removed later when there is an authentication
+		param :form, :user_id, :integer, :required, "User ID"
 		param :form, :title, :integer, :optional, "Title"
 		param :form, :time, :string, :required, "Time"
 		param :form, :duration, :string, :required, "Duration"
@@ -26,6 +29,7 @@ class WorkoutsController < ApplicationController
 
 	swagger_api :update do
 		summary "Updates a workout with a given set of parameters"
+		notes "There is no authentication for update at the moment"
 		param :form, :title, :integer, :optional, "Title"
 		param :form, :time, :string, :required, "Time"
 		param :form, :duration, :string, :required, "Duration"
@@ -37,6 +41,7 @@ class WorkoutsController < ApplicationController
 
 	swagger_api :destroy do
 		summary "Destroys a workout"
+		notes "There is no authentication for destroy at the moment"
 		param :path, :id, :integer, :required, "Workout ID"
 		response :not_found
 	end
@@ -57,10 +62,7 @@ class WorkoutsController < ApplicationController
 	# Note: Returns all related information such as all joined_workouts and 
 	def show
 		@joined_workouts = @workout.joined_workouts
-		respond_to do |format|
-			format.json  { render :json => {:workout => @workout, 
-											:joined_workouts => @joined_workouts }}
-		end		  
+		render :json => {:workout => @workout, :joined_workouts => @joined_workouts, :owner => @workout.user}
 	end
 
 	# An endpoint to creates a workout
@@ -70,12 +72,9 @@ class WorkoutsController < ApplicationController
 		@workout = Workout.new(workout_params)
 		# Finalized is set by the server
 		@workout.finalized = false
-		# TODO : USER IS A DUMMY: PUT AN ACTUAL USER
-		user = User.new()
-		@workout.user = user
 		if @workout.save
 			# TODO : USER_ID IS A DUMMY; PUT AN ACTUAL USER ID
-			info = {user_id: 1, workout_id: @workout.id, approved: true, checked_in: false, accepted: true}
+			info = {user_id: @workout.user_id, workout_id: @workout.id, approved: true, checked_in: false, accepted: true}
 			JoinedWorkout.create(info)
 			render json: @workout, status: :created
 		else
@@ -107,8 +106,9 @@ class WorkoutsController < ApplicationController
 
 	# Parameter for creating a workout 
 	# TODO : Make a separate endpoint for updating a workout / finalizing a workout
+	# TODO : Take out user_id once authentication is in place
 	def workout_params
-		params.permit(:title, :time, :duration, :location, :team_size)
+		params.permit(:title, :time, :duration, :location, :team_size, :user_id)
 	end
 
 end

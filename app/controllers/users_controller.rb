@@ -94,7 +94,7 @@ class UsersController < ApplicationController
 	private
 	# Method to set the user before endpoints for show, update and destroy
 	def set_user
-		@user.User.find(params[:id])
+		@user = User.find(params[:id])
 	end
 
 	# Parameter whitelisting for user_params for create
