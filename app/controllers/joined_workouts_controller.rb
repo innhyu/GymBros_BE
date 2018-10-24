@@ -29,7 +29,7 @@ class JoinedWorkoutsController < ApplicationController
 	end
 
 	# Callbacks
-	before_action :set_joined_workout, only: [:update, :destroy]
+	before_action :set_joined_workout, only: [:update, :accept, :approve, :destroy]
 
 	# An endpoint to create a joined workout
 	# Parameters: joined_workout params
