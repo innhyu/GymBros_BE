@@ -4,18 +4,19 @@ class WorkoutsController < ApplicationController
 
 	swagger_api :index do
 		summary "Fetches all workouts"
-		notes "There is no visibility settings at the moment"
+		notes "There is no visibility settings at the moment; this action will allow filters and sorts."
 	end
 
 	swagger_api :show do 
 		summary "Shows a particular workout's data"
+		notes "This fetches all data related to the workout, including owner and joined workouts."
 		param :path, :id, :integer, :required, "Workout ID"
-		notes "This fetches all data related to the workout"
 		response :not_found
 	end
 
 	swagger_api :create do
 		summary "Creates a workout with a given set of parameters"
+		notes "For now, we are passing the owner as a parameter as we do not have authentication"
 		# TODO : User ID should be removed later when there is an authentication
 		param :form, :user_id, :integer, :required, "User ID"
 		param :form, :title, :integer, :optional, "Title"
@@ -28,6 +29,7 @@ class WorkoutsController < ApplicationController
 
 	swagger_api :update do
 		summary "Updates a workout with a given set of parameters"
+		notes "There is no authentication for update at the moment"
 		param :form, :title, :integer, :optional, "Title"
 		param :form, :time, :string, :required, "Time"
 		param :form, :duration, :string, :required, "Duration"
@@ -39,6 +41,7 @@ class WorkoutsController < ApplicationController
 
 	swagger_api :destroy do
 		summary "Destroys a workout"
+		notes "There is no authentication for destroy at the moment"
 		param :path, :id, :integer, :required, "Workout ID"
 		response :not_found
 	end
