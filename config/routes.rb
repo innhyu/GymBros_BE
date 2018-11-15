@@ -7,5 +7,8 @@ Rails.application.routes.draw do
 	# Custom Routes
 	patch 'joined_workouts/:id/approve', to: 'joined_workouts#approve'
 	patch 'joined_workouts/:id/accept', to: 'joined_workouts#accept'
+	# Authentication routes
+	post 'login' => 'sessions#create', :as => :login
+	post 'logout' => 'sessions#destroy', :as => :logout
 
 end
