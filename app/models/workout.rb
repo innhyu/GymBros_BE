@@ -3,6 +3,10 @@ class Workout < ApplicationRecord
 	# List of acceptable locations
 	LOCATIONS = ['WIEGAND GYMNASIUM', 'JARED L. COHON CENTER GYMNASIUM', 'SKIBO GYMNASIUM']
 
+	#Scopes
+	scope :expired, -> { where("time < ?", Date.today) }
+	scope :current, -> { where("time >= ?", Date.today) }
+
 	# Relationship
 	has_many :joined_workouts
 	belongs_to :user

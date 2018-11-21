@@ -16,6 +16,28 @@
       ]
     },
     {
+      "path": "/workouts_archived.json",
+      "operations": [
+        {
+          "summary": "Fetches all old workouts",
+          "notes": "There is no visibility settings at the moment",
+          "nickname": "Workouts#archived",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/workouts_current.json",
+      "operations": [
+        {
+          "summary": "Fetches all current workouts",
+          "notes": "There is no visibility settings at the moment",
+          "nickname": "Workouts#current",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/workouts.json",
       "operations": [
         {

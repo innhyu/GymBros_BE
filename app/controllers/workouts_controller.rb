@@ -57,6 +57,16 @@ class WorkoutsController < ApplicationController
 		render json: @workouts
 	end
 
+	def archived
+		@workouts = Workout.all.expired
+		render json: @workouts
+	end	
+
+	def current
+		@workouts = Workout.all.current
+		render json: @workouts
+	end
+
 	# An endoint to show the workokut and related details
 	# Parameters: User ID, Workout ID
 	# Note: Returns all related information such as all joined_workouts and 
