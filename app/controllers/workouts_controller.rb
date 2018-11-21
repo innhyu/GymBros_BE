@@ -47,7 +47,7 @@ class WorkoutsController < ApplicationController
 	end
 	
 	# Callbacks
-	before_action :set_workout, only: [:show, :update, :destroy]
+	before_action :set_workout, only: [:show, :update, :destroy, :finalize]
 
 	# An endpoint to fetch all the workouts
 	# Parameters: User ID
