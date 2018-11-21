@@ -98,6 +98,14 @@ class WorkoutsController < ApplicationController
 		@workout.delete
 	end
 
+	def finalize
+		if @workout.update(finalized: true)
+			render json: @workout
+		else
+			render json: @workout.errors, status: :unprocessable_entity
+		end
+	end
+
 	private
 	# Method to set the workout before certain actions: SHOW, UPDATE, DESTROY
 	def set_workout

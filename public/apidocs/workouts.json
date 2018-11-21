@@ -203,6 +203,32 @@
           "method": "delete"
         }
       ]
+    },
+    {
+      "path": "/workouts/{id}/finalize.json",
+      "operations": [
+        {
+          "summary": "Updates the workout to be finalized",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Workout ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "Workouts#finalize",
+          "method": "patch"
+        }
+      ]
     }
   ],
   "authorizations": null
