@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://cryptic-temple-10365.herokuapp.com",
+  "basePath": "http://localhost:3000",
   "resourcePath": "workouts",
   "apis": [
     {
@@ -9,30 +9,17 @@
       "operations": [
         {
           "summary": "Fetches all workouts",
-          "notes": "There is no visibility settings at the moment",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            }
+          ],
+          "notes": "There is no visibility settings at the moment; this action will allow filters and sorts.",
           "nickname": "Workouts#index",
-          "method": "get"
-        }
-      ]
-    },
-    {
-      "path": "/workouts_archived.json",
-      "operations": [
-        {
-          "summary": "Fetches all old workouts",
-          "notes": "There is no visibility settings at the moment",
-          "nickname": "Workouts#archived",
-          "method": "get"
-        }
-      ]
-    },
-    {
-      "path": "/workouts_current.json",
-      "operations": [
-        {
-          "summary": "Fetches all current workouts",
-          "notes": "There is no visibility settings at the moment",
-          "nickname": "Workouts#current",
           "method": "get"
         }
       ]
@@ -43,6 +30,13 @@
         {
           "summary": "Creates a workout with a given set of parameters",
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            },
             {
               "paramType": "form",
               "name": "user_id",
@@ -94,6 +88,7 @@
               "required": true
             }
           ],
+          "notes": "For now, we are passing the owner as a parameter as we do not have authentication",
           "responseMessages": [
             {
               "code": 406,
@@ -111,8 +106,14 @@
       "operations": [
         {
           "summary": "Shows a particular workout's data",
-          "notes": "This fetches all data related to the workout",
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            },
             {
               "paramType": "path",
               "name": "id",
@@ -121,6 +122,7 @@
               "required": true
             }
           ],
+          "notes": "This fetches all data related to the workout, including owner and joined workouts.",
           "responseMessages": [
             {
               "code": 404,
@@ -139,6 +141,13 @@
         {
           "summary": "Updates a workout with a given set of parameters",
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            },
             {
               "paramType": "form",
               "name": "title",
@@ -183,6 +192,7 @@
               "required": true
             }
           ],
+          "notes": "There is a lot of authentication for update at the moment",
           "responseMessages": [
             {
               "code": 404,
@@ -207,6 +217,13 @@
           "summary": "Destroys a workout",
           "parameters": [
             {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            },
+            {
               "paramType": "path",
               "name": "id",
               "type": "integer",
@@ -214,6 +231,7 @@
               "required": true
             }
           ],
+          "notes": "There is a lot of authentication for destroy at the moment",
           "responseMessages": [
             {
               "code": 404,
@@ -230,8 +248,15 @@
       "path": "/workouts/{id}/finalize.json",
       "operations": [
         {
-          "summary": "Updates the workout to be finalized",
+          "summary": "Finalizes a workout",
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            },
             {
               "paramType": "path",
               "name": "id",
@@ -240,6 +265,7 @@
               "required": true
             }
           ],
+          "notes": "There is a lot of authentication for finalize at the moment",
           "responseMessages": [
             {
               "code": 404,

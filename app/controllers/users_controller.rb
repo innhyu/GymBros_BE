@@ -4,11 +4,13 @@ class UsersController < ApplicationController
 
 	swagger_api :index do
 		summary "Fetches all users"
-		notes "There is no authentication at the moment"
+		param :header, 'Authorization', :string, :required, 'Authentication-Token'
+		notes "There is a lot of authentication at the moment"
 	end
 
 	swagger_api :show do 
 		summary "Shows a particular user's data"
+		param :header, 'Authorization', :string, :required, 'Authentication-Token'
 		param :path, :id, :integer, :required, "User ID"
 		notes "This fetches a single user"
 		response :not_found
@@ -30,6 +32,7 @@ class UsersController < ApplicationController
 
 	swagger_api :update do
 		summary "Updates a user with a given set of parameters"
+		param :header, 'Authorization', :string, :required, 'Authentication-Token'
 		param :path, :id, :integer, :required, "User ID"
 		param :form, :password, :string, :required, "Password"
 		param :form, :password_confirmation, :string, :required, "Password Confirmation"
@@ -43,6 +46,7 @@ class UsersController < ApplicationController
 
 	swagger_api :destroy do
 		summary "Destroys a user with a given set of parameters"
+		param :header, 'Authorization', :string, :required, 'Authentication-Token'
 		param :path, :id, :integer, :required, "User ID"
 		response :not_found
 	end
@@ -50,6 +54,7 @@ class UsersController < ApplicationController
 
 
 	# Callbacks
+	skip_before_action :authenticate_request, only: [:create]
 	before_action :set_user, only: [:show, :update, :destroy]
 
 	#for testing

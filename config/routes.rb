@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 	get 'workouts_archived' => 'workouts#archived'
 	get 'workouts_current' => 'workouts#current'
 	# Authentication routes
-	post 'login' => 'sessions#create', :as => :login
-	post 'logout' => 'sessions#destroy', :as => :logout
+	#post 'login' => 'sessions#create', :as => :login
+	#post 'logout' => 'sessions#destroy', :as => :logout
+	post 'authenticate', to: 'authentication#authenticate'
 
 end

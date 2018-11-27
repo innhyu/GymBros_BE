@@ -2,15 +2,15 @@
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
   "basePath": "/",
-  "resourcePath": "sessions",
+  "resourcePath": "authentication",
   "apis": [
     {
-      "path": "/login.json",
+      "path": "/authenticate.json",
       "operations": [
         {
-          "summary": "Fetches and logs in a user",
-          "notes": "There is no authentication at the moment",
-          "nickname": "Sessions#create",
+          "summary": "Fetches an authentication token",
+          "notes": "Needed to access other actions",
+          "nickname": "Authentication#authenticate",
           "method": "post",
           "parameters": [
             {

@@ -4,8 +4,9 @@ class JoinedWorkoutsController < ApplicationController
 
 	swagger_api :create do
 		summary "Joins a user into a workout through the joined workout table"
-		notes "Doesn't have authentication for user_id; will be added later."
+		notes "Does have authentication for user_id; will not be be added later."
 		# TODO : ADD IN AUTHENTICATION THEN USE THE USER ID
+		param :header, 'Authorization', :string, :required, 'Authentication-Token'
 		param :form, :user_id, :integer, :required, 'User ID'
 		param :form, :workout_id, :integer, :required, 'Workout ID'
 		response :not_acceptable
@@ -14,6 +15,7 @@ class JoinedWorkoutsController < ApplicationController
 	swagger_api :accept do 
 		summary "Updates the joined workout to be accept"
 		notes "When user joins a workout, the host has to accept that particular user."
+		param :header, 'Authorization', :string, :required, 'Authentication-Token'
 		param :path, :id, :integer, :required, "Joined Workout ID"
 		response :not_found
 	end
@@ -21,13 +23,15 @@ class JoinedWorkoutsController < ApplicationController
 	swagger_api :approve do 
 		summary "Updates the joined workout to be approve"
 		notes "When the host changes a workout detail, the user has to approve the workout again."
+		param :header, 'Authorization', :string, :required, 'Authentication-Token'
 		param :path, :id, :integer, :required, "Joined Workout ID"
 		response :not_found
 	end
 
 	swagger_api :destroy do
 		summary "Destroys a joined workout with a given set of parameters"
-		notes "Doesn't have authentication for user_id; will be added later. Anyone can leave a workout. Will have some penalties for leaving later."
+		notes "Does have authentication for user_id; will not be added later. Anyone can leave a workout. Will have some penalties for leaving later."
+		param :header, 'Authorization', :string, :required, 'Authentication-Token'
 		param :path, :id, :integer, :required, "Joined Workout ID"
 		response :not_found
 	end

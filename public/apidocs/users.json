@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://cryptic-temple-10365.herokuapp.com",
+  "basePath": "http://localhost:3000",
   "resourcePath": "users",
   "apis": [
     {
@@ -9,7 +9,16 @@
       "operations": [
         {
           "summary": "Fetches all users",
-          "notes": "There is no authentication at the moment",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            }
+          ],
+          "notes": "There is a lot of authentication at the moment",
           "nickname": "Users#index",
           "method": "get"
         }
@@ -116,8 +125,14 @@
       "operations": [
         {
           "summary": "Shows a particular user's data",
-          "notes": "This fetches a single user",
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            },
             {
               "paramType": "path",
               "name": "id",
@@ -126,6 +141,7 @@
               "required": true
             }
           ],
+          "notes": "This fetches a single user",
           "responseMessages": [
             {
               "code": 404,
@@ -144,6 +160,13 @@
         {
           "summary": "Updates a user with a given set of parameters",
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            },
             {
               "paramType": "path",
               "name": "id",
@@ -217,6 +240,13 @@
         {
           "summary": "Destroys a user with a given set of parameters",
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication-Token",
+              "required": true
+            },
             {
               "paramType": "path",
               "name": "id",
