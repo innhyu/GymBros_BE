@@ -72,7 +72,7 @@ class WorkoutsController < ApplicationController
 	# Note: Returns all related information such as all joined_workouts and 
 	def show
 		@joined_workouts = @workout.joined_workouts
-		render :json => {:workout => @workout, :joined_workouts => @joined_workouts, :owner => @workout.user}
+		render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
 	end
 
 	# An endpoint to creates a workout
