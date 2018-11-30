@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 	# Rails basic resources
 	resources :users
-	resources :workouts
+	resources :workouts, only: [:index, :update, :destroy, :create]
 	resources :joined_workouts, only: [:create, :destroy]
 
 	# Custom Routes
@@ -13,5 +13,6 @@ Rails.application.routes.draw do
 	# Authentication routes
 	post 'login' => 'sessions#create', :as => :login
 	post 'logout' => 'sessions#destroy', :as => :logout
+	get 'workouts/:id/:user_id' => 'workouts#show'
 
 end
