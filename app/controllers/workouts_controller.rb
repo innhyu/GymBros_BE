@@ -73,24 +73,20 @@ class WorkoutsController < ApplicationController
 	# Note: Returns all related information such as all joined_workouts and 
 	def show
 		unless params[:user_id]
-			print("hi1")
 			@joined_workouts = @workout.joined_workouts
 			render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
 		else
 			#owner call
 			if params[:user_id].to_i == @workout.user.id
 				@joined_workouts = @workout.joined_workouts
-				print("hi2")
 				render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
 			#accepted user call
 			elsif @workout.joined_workouts.accepted_users.map{|jw| jw.user.id }.include?(params[:user_id].to_i)
-				print("hi3")
 				@joined_workouts = @workout.joined_workouts.accepted_users
 				render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
 			#stranger call
 			else
 				@joined_workouts = @workout.joined_workouts.where(workout_id: @workout.id, user_id: @workout.user.id)
-				print("hello")
 				render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
 			end
 		end
