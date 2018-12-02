@@ -107,7 +107,7 @@
       ]
     },
     {
-      "path": "/workouts/{id}.json",
+      "path": "/workouts/{id}/{user_id}.json",
       "operations": [
         {
           "summary": "Shows a particular workout's data",
@@ -119,6 +119,13 @@
               "type": "integer",
               "description": "Workout ID",
               "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "user_id",
+              "type": "integer",
+              "description": "User ID",
+              "required": false
             }
           ],
           "responseMessages": [

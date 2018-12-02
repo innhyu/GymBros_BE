@@ -10,7 +10,8 @@ class WorkoutsController < ApplicationController
 	swagger_api :show do 
 		summary "Shows a particular workout's data"
 		notes "This fetches all data related to the workout, including owner and joined workouts."
-		param :path, :id, :integer, :required, "Workout ID"
+		param :form, :id, :integer, :required, "Workout ID"
+		param :form, :user_id, :integer, "User ID"
 		response :not_found
 	end
 
@@ -71,8 +72,18 @@ class WorkoutsController < ApplicationController
 	# Parameters: User ID, Workout ID
 	# Note: Returns all related information such as all joined_workouts and 
 	def show
-		@joined_workouts = @workout.joined_workouts
-		render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
+		unless params[:user_id]
+			@joined_workouts = @workout.joined_workouts
+			render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
+		else
+			if params[:user_id] == @workout.user.id
+				@joined_workouts = @workout.joined_workouts
+				render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
+			else
+				@joined_workouts = @workout.joined_workouts.accepted_users
+				render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
+			end
+		end
 	end
 
 	# An endpoint to creates a workout

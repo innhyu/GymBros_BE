@@ -6,4 +6,7 @@ class JoinedWorkout < ApplicationRecord
 	#Validations
 	validates_uniqueness_of :user_id, scope: :workout_id
 
+	#Scopes
+	scope :accepted_users, -> { where(accepted: true) }
+
 end
