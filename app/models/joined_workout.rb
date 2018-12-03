@@ -8,5 +8,6 @@ class JoinedWorkout < ApplicationRecord
 
 	#Scopes
 	scope :accepted_users, -> { where(accepted: true) }
+	scope :unaccepted_users, -> { where(accepted: false) }
 
 end

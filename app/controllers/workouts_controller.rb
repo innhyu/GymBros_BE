@@ -84,6 +84,10 @@ class WorkoutsController < ApplicationController
 			elsif @workout.joined_workouts.accepted_users.map{|jw| jw.user.id }.include?(params[:user_id].to_i)
 				@joined_workouts = @workout.joined_workouts.accepted_users
 				render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
+			#unaccepted user call
+			elsif @workout.joined_workouts.unaccepted_users.map{|jw| jw.user.id }.include?(params[:user_id].to_i)
+				@joined_workouts = @workout.joined_workouts.where("user_id=? OR user_id=?", params[:user_id].to_i, @workout.user.id)
+				render :json => {:workout => @workout, :joined_workouts => @joined_workouts.map {|jw| [jw, jw.user] }, :owner => @workout.user}
 			#stranger call
 			else
 				@joined_workouts = @workout.joined_workouts.where(workout_id: @workout.id, user_id: @workout.user.id)
