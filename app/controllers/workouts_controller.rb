@@ -54,7 +54,7 @@ class WorkoutsController < ApplicationController
 	# Parameters: User ID
 	# TODO : We want to limit the visibility for workouts depending on the user's profile information
 	def index
-		@workouts = Workout.all
+		@workouts = Workout.all.chronological
 		render json: @workouts
 	end
 

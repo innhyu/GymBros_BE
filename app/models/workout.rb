@@ -6,6 +6,7 @@ class Workout < ApplicationRecord
 	#Scopes
 	scope :expired, -> { where("time < ?", Date.today) }
 	scope :current, -> { where("time >= ?", Date.today) }
+	scope :chronological, -> { order('time') }
 
 	# Relationship
 	has_many :joined_workouts
