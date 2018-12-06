@@ -8,6 +8,7 @@ class CreateWorkouts < ActiveRecord::Migration[5.1]
       t.string :location
       t.integer :team_size
       t.boolean :finalized
+      t.integer :check_in_code
 
       t.timestamps
     end

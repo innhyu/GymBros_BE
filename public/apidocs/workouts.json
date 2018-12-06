@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://cryptic-temple-10365.herokuapp.com",
+  "basePath": "/",
   "resourcePath": "workouts",
   "apis": [
     {
@@ -146,6 +146,13 @@
         {
           "summary": "Updates a workout with a given set of parameters",
           "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Workout ID",
+              "required": true
+            },
             {
               "paramType": "form",
               "name": "title",

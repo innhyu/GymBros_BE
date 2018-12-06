@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20181021195054) do
     t.string "location"
     t.integer "team_size"
     t.boolean "finalized"
+    t.integer "check_in_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -10,9 +10,13 @@ Rails.application.routes.draw do
 	patch 'workouts/:id/finalize', to: 'workouts#finalize'
 	get 'workouts_archived' => 'workouts#archived'
 	get 'workouts_current' => 'workouts#current'
+	patch 'joined_workouts/:id/check_in', to: 'joined_workouts#check_in'
+
 	# Authentication routes
 	post 'login' => 'sessions#create', :as => :login
 	post 'logout' => 'sessions#destroy', :as => :logout
+
+	# Custom Show route
 	get 'workouts/:id/:user_id' => 'workouts#show'
 
 end

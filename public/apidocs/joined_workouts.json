@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://cryptic-temple-10365.herokuapp.com",
+  "basePath": "/",
   "resourcePath": "joined_workouts",
   "apis": [
     {
@@ -100,6 +100,39 @@
               "name": "id",
               "type": "integer",
               "description": "Joined Workout ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            }
+          ],
+          "nickname": "JoinedWorkouts#accept",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/joined_workouts/{id}/check_in.json",
+      "operations": [
+        {
+          "summary": "Updates the joined workout to be checked in",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Joined Workout ID",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "check_in_code",
+              "type": "integer",
+              "description": "Joined Workout Check In Code",
               "required": true
             }
           ],

@@ -54,7 +54,7 @@ class WorkoutsController < ApplicationController
 	# Parameters: User ID
 	# TODO : We want to limit the visibility for workouts depending on the user's profile information
 	def index
-		@workouts = Workout.all.chronological
+		@workouts = Workout.all.chronological.current
 		render json: @workouts
 	end
 
@@ -105,7 +105,7 @@ class WorkoutsController < ApplicationController
 		@workout.finalized = false
 		if @workout.save
 			# TODO : USER_ID IS A DUMMY; PUT AN ACTUAL USER ID
-			info = {user_id: @workout.user_id, workout_id: @workout.id, approved: true, checked_in: false, accepted: true}
+			info = {user_id: @workout.user_id, workout_id: @workout.id, approved: true, checked_in: true, accepted: true}
 			JoinedWorkout.create(info)
 			render json: @workout, status: :created
 		else
@@ -117,6 +117,11 @@ class WorkoutsController < ApplicationController
 	# Parameters: workout_params method and workout_id
 	def update
 		if @workout.update(workout_params)
+			for jw in @workout.joined_workouts.each do
+				unless jw.user.id == @workout.user.id
+					jw.update_attribute(:approved, false)
+				end
+			end
 			render json: @workout
 		else
 			render json: @workout.errors, status: :unprocessable_entity
@@ -130,9 +135,16 @@ class WorkoutsController < ApplicationController
 	end
 
 	def finalize
-		if @workout.update(finalized: true)
-			render json: @workout
+		@rando = rand(100000..999999)
+		if @workout.everyone_approved && @workout.joined_workouts.accepted_users.count > 1
+			if @workout.update_attribute(:finalized, true) && @workout.update_attribute(:check_in_code, @rando)
+				@workout.check_and_destroy_unaccepted_users
+				render json: @workout
+			else
+				render json: @workout.errors, status: :unprocessable_entity
+			end
 		else
+			@workout.errors.add(:finalized, "some users have not approved yet")
 			render json: @workout.errors, status: :unprocessable_entity
 		end
 	end
@@ -143,9 +155,7 @@ class WorkoutsController < ApplicationController
 		@workout = Workout.find(params[:id])
 	end
 
-	# Parameter for creating a workout 
-	# TODO : Make a separate endpoint for updating a workout / finalizing a workout
-	# TODO : Take out user_id once authentication is in place
+	# Parameters for creating a workout 
 	def workout_params
 		params.permit(:title, :time, :duration, :location, :team_size, :user_id)
 	end
