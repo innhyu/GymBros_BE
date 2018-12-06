@@ -23,6 +23,7 @@ class Workout < ApplicationRecord
 	validates_numericality_of :team_size, only_integer: true, less_than: 10, greater_than_or_equal_to: 2
 	validate :not_finalized, on: :update
 	validate :check_in_correct
+	validate :team_size_above_actual
 	
 	def self.current
 		result = []
@@ -68,6 +69,15 @@ class Workout < ApplicationRecord
 			end
 		end
 		return true
+	end
+
+	def team_size_above_actual
+		if self.team_size >= self.joined_workouts.accepted_users.count
+			return true
+		else
+			errors.add(:team_size, "cannot be below already accepted users")
+			return false
+		end
 	end
 
 end

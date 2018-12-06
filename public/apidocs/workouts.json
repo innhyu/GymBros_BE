@@ -5,13 +5,22 @@
   "resourcePath": "workouts",
   "apis": [
     {
-      "path": "/workouts.json",
+      "path": "/workouts/{user_id}.json",
       "operations": [
         {
           "summary": "Fetches all workouts",
           "notes": "There is no visibility settings at the moment",
           "nickname": "Workouts#index",
-          "method": "get"
+          "method": "get",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "user_id",
+              "type": "integer",
+              "description": "User ID",
+              "required": true
+            }
+          ]
         }
       ]
     },

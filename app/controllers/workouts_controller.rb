@@ -54,8 +54,11 @@ class WorkoutsController < ApplicationController
 	# Parameters: User ID
 	# TODO : We want to limit the visibility for workouts depending on the user's profile information
 	def index
-		@workouts = Workout.all.chronological.current
-		render json: @workouts
+		@user = User.find(params[:user_id].to_i)
+		@user_workouts = @user.workouts.chronological.current
+		@other_workouts = Workout.all.chronological.current.where.not(id: @user_workouts.pluck(:id))
+		#@workouts = Workout.all.chronological.current
+		render :json => { :user_workouts => @user_workouts, :other_workouts => @other_workouts }
 	end
 
 	def archived
@@ -144,7 +147,7 @@ class WorkoutsController < ApplicationController
 				render json: @workout.errors, status: :unprocessable_entity
 			end
 		else
-			@workout.errors.add(:finalized, "some users have not approved yet")
+			@workout.errors.add(:finalized, "some users have not approved yet or there are not enough users in the workout")
 			render json: @workout.errors, status: :unprocessable_entity
 		end
 	end

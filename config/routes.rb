@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 	# Rails basic resources
 	resources :users
-	resources :workouts, only: [:index, :update, :destroy, :create]
+	resources :workouts, only: [:update, :destroy, :create]
 	resources :joined_workouts, only: [:create, :destroy]
 
 	# Custom Routes
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 	get 'workouts_archived' => 'workouts#archived'
 	get 'workouts_current' => 'workouts#current'
 	patch 'joined_workouts/:id/check_in', to: 'joined_workouts#check_in'
+	get 'workouts/:user_id' => 'workouts#index'
 
 	# Authentication routes
 	post 'login' => 'sessions#create', :as => :login
