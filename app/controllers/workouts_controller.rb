@@ -55,10 +55,11 @@ class WorkoutsController < ApplicationController
 	# TODO : We want to limit the visibility for workouts depending on the user's profile information
 	def index
 		@user = User.find(params[:user_id].to_i)
-		@user_workouts = @user.workouts.chronological.current
-		@other_workouts = Workout.all.chronological.current.where.not(id: @user_workouts.pluck(:id))
+		#wierd error, database gets angry when putting order clause before second statement
+		@user_workouts = Workout.all.current.joined_by(@user.id)#.chronological
+		@other_workouts = Workout.all.current.where.not(id: @user_workouts.pluck(:id)).chronological
 		#@workouts = Workout.all.chronological.current
-		render :json => { :user_workouts => @user_workouts, :other_workouts => @other_workouts }
+		render :json => { :user_workouts => @user_workouts.chronological, :other_workouts => @other_workouts }
 	end
 
 	def archived
