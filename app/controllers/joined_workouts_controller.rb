@@ -33,7 +33,7 @@ class JoinedWorkoutsController < ApplicationController
 	end
 
 	# Callbacks
-	before_action :set_joined_workout, only: [:update, :accept, :approve, :destroy]
+	before_action :set_joined_workout, only: [:update, :accept, :approve, :check_in, :destroy]
 
 	# An endpoint to create a joined workout
 	# Parameters: joined_workout params
@@ -66,6 +66,19 @@ class JoinedWorkoutsController < ApplicationController
 		if @joined_workout.update(approved: true)
 			render json: @joined_workout
 		else
+			render json: @joined_workout.errors, status: :unprocessable_entity
+		end
+	end
+
+	def check_in
+		if @joined_workout.workout.check_in_code == params[:check_in_code].to_i
+			if @joined_workout.update(checked_in: true)
+				render json: @joined_workout
+			else
+				render json: @joined_workout.errors, status: :unprocessable_entity
+			end
+		else
+			@joined_workout.errors.add(:checked_in, "code incorrect")
 			render json: @joined_workout.errors, status: :unprocessable_entity
 		end
 	end
